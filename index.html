@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Taxas de Cartão</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            padding-top: 50px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function calcular() {
+            const taxas = {
+                1: 3.15, 2: 4.19, 3: 4.83, 4: 5.46, 5: 6.09, 6: 6.71, 7: 7.38,
+                8: 7.99, 9: 8.60, 10: 9.19, 11: 9.78, 12: 10.38, 13: 10.98,
+                14: 11.54, 15: 12.11, 16: 12.69, 17: 13.25, 18: 13.81
+            };
+            
+            let valorProduto = parseFloat(document.getElementById("valorProduto").value);
+            let parcelas = parseInt(document.getElementById("parcelas").value);
+            let taxa = taxas[parcelas] || 0;
+            
+            let valorComTaxa = valorProduto * (1 + (taxa / 100));
+            let valorParcela = valorComTaxa / parcelas;
+            
+            document.getElementById("resultado").innerHTML =
+                `Valor Total com Taxa: R$ ${valorComTaxa.toFixed(2)}<br>` +
+                `Valor por Parcela: R$ ${valorParcela.toFixed(2)}`;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="title">GO PLACE STORE</div>
+        <h2>Calculadora de Taxas de Cartão</h2>
+        <label>Valor do Produto:</label>
+        <input type="number" id="valorProduto" step="0.01">
+        <br>
+        <label>Quantidade de Parcelas:</label>
+        <input type="number" id="parcelas" min="1" max="18">
+        <br>
+        <button onclick="calcular()">Calcular</button>
+        <h3 id="resultado"></h3>
+    </div>
+</body>
+</html>
